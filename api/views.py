@@ -11,3 +11,5 @@ def index(request):
 def getstatus(request):
     response = requests.get("http://www.viaquatro.com.br/generic/Main/LineStatus")
     return JsonResponse(response.json())
+
+# def line(request):
