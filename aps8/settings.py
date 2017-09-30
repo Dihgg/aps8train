@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,10 +81,29 @@ WSGI_APPLICATION = 'aps8.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
+    'development': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'aps8train',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '',
+    },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'u876755729_aps8',
+        'USER': 'u876755729_aps8',
+        'PASSWORD': ':Lm@N/K0@f+xYaUC',
+        'HOST': 'sql8.main-hosting.eu',
+        'PORT': '',
     }
 }
 
