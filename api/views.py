@@ -84,8 +84,6 @@ def _log(_line, _status, _description):
             description=_description
         ).save()
     else:
-        logger.error("AAAAA")
-        logger.error(Log.objects.filter(id=last_log.id).exists())
         Log.objects.filter(id=last_log.id).update(
             updated_at=timezone.now()
         )
