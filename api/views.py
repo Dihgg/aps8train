@@ -56,17 +56,17 @@ def update_lines(request):
 
 def logs(request):
     _line_number = request.GET.get('line', '')
-    logger.error(_line_number)
     line = Line.objects.filter(number=_line_number).first()
-    results = []
+    results = {}
     if line:
+        results['line'] = {
+            'color': line.color,
+            'number': line.number,
+            'name': line.name
+        }
+        results['logs'] = []
         for log in Log.objects.filter(line_id=line.id).order_by('-updated_at'):
-            results.append({
-                'line': {
-                    'color': line.color,
-                    'number': line.number,
-                    'name': line.name
-                },
+            results['logs'].append({
                 'log': {
                     'status': log.status,
                     'description': log.description,
@@ -86,14 +86,12 @@ def logs(request):
 def _save_line(_line):
     line = Line.objects.filter(number=_line['number'])
     if line.exists():
-        logger.error("Saving a new line 1")
         line.update(
             number=_line['number'], color=_line['color'],
             name=_line['name'],
             updated_at=timezone.localtime(timezone.now())
         )
     else:
-        logger.error("Saving a new line")
         Line(
             number=_line['number'],
             color=_line['color'],
@@ -114,6 +112,7 @@ def _log(_line, _status, _description):
             description=_description
         ).save()
     else:
+        logger.error("updated log")
         Log.objects.filter(id=last_log.id).update(
             updated_at=timezone.localtime(timezone.now())
         )

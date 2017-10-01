@@ -15,7 +15,7 @@ class Line(models.Model):
         auto_now_add=True
     )
     updated_at = models.DateTimeField(
-        auto_now_add=True
+        auto_now=True
     )
 
 
@@ -32,9 +32,9 @@ class Log(models.Model):
         blank=True
     )
     created_at = models.DateTimeField(
-        default=timezone.localtime(timezone.now())
+        auto_now_add=True
     )
     updated_at = models.DateTimeField(
-        default=timezone.localtime(timezone.now())
+        auto_now=True
     )
 
