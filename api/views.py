@@ -90,7 +90,7 @@ def _save_line(_line):
         line.update(
             number=_line['number'], color=_line['color'],
             name=_line['name'],
-            updated_at=timezone.now()
+            updated_at=timezone.localtime(timezone.now())
         )
     else:
         logger.error("Saving a new line")
@@ -115,5 +115,5 @@ def _log(_line, _status, _description):
         ).save()
     else:
         Log.objects.filter(id=last_log.id).update(
-            updated_at=timezone.now()
+            updated_at=timezone.localtime(timezone.now())
         )
