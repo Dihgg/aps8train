@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 
 
@@ -31,9 +32,9 @@ class Log(models.Model):
         blank=True
     )
     created_at = models.DateTimeField(
-        auto_now_add=True
+        default=timezone.localtime(timezone.now())
     )
     updated_at = models.DateTimeField(
-        auto_now=True
+        default=timezone.localtime(timezone.now())
     )
 
