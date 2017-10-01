@@ -65,6 +65,7 @@ def _save_line(_line):
             updated_at=timezone.now()
         )
     else:
+        logger.error("Saving a new line")
         Line(
             number=_line['number'],
             color=_line['color'],
