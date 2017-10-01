@@ -73,7 +73,7 @@ def logs(request):
                     'updated_at': log.updated_at
                 }
             })
-        return JsonResponse(results)
+        return JsonResponse(results, safe=False)
 
     else:
         return JsonResponse({
