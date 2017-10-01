@@ -59,7 +59,7 @@ def logs(request):
     logger.error(_line_number)
     line = Line.objects.filter(number=_line_number).first()
     results = []
-    if line.exists():
+    if line:
         for log in Log.objects.filter(line_id=line.id):
             results.append({
                 'line': {
