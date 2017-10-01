@@ -54,10 +54,36 @@ def update_lines(request):
     })
 
 
+def logs(request):
+    _line_number = request.GET.get('line', '')
+    line = Line.objects.filter(number=_line_number)
+    results = []
+    if line.exists():
+        for log in Log.objects.filter(line_id=line.id):
+            results.append({
+                'line': {
+                    'color': line.color,
+                    'number': line.number,
+                    'name': line.name
+                },
+                'log': {
+                    'status': log.status,
+                    'description': log.description,
+                    'updated_at': log.updated_at
+                }
+            })
+        return JsonResponse(results)
+
+    else:
+        return JsonResponse({
+            'status': "error",
+            'message': "Line does not exist"
+        })
+
+
 # PRIVATE FUNCTION
 def _save_line(_line):
     line = Line.objects.filter(number=_line['number'])
-    logger.error(line.first().color)
     if line.exists():
         logger.error("Saving a new line 1")
         line.update(
