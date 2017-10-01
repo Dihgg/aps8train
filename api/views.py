@@ -56,6 +56,7 @@ def update_lines(request):
 
 def logs(request):
     _line_number = request.GET.get('line', '')
+    logger.error(_line_number)
     line = Line.objects.filter(number=_line_number)
     results = []
     if line.exists():
