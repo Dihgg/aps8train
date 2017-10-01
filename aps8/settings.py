@@ -89,14 +89,6 @@ WSGI_APPLICATION = 'aps8.wsgi.application'
 # }
 
 DATABASES = {
-    'development': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aps8train',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '',
-    },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'u876755729_aps8',
