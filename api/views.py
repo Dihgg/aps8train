@@ -60,7 +60,7 @@ def logs(request):
     line = Line.objects.filter(number=_line_number).first()
     results = []
     if line:
-        for log in Log.objects.filter(line_id=line.id):
+        for log in Log.objects.filter(line_id=line.id).order_by('-updated_at'):
             results.append({
                 'line': {
                     'color': line.color,
