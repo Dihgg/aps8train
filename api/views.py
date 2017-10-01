@@ -57,6 +57,7 @@ def update_lines(request):
 # PRIVATE FUNCTION
 def _save_line(_line):
     line = Line.objects.filter(number=_line['number'])
+    logger.error(line)
     if line.exists():
         line.update(
             number=_line['number'], color=_line['color'],
