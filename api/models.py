@@ -30,9 +30,6 @@ class Log(models.Model):
         null=True,
         blank=True
     )
-    datetime = models.DateTimeField(
-        auto_now_add=True
-    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
