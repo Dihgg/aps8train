@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=30)
+@sched.scheduled_job('interval', minutes=15)
 def timed_job():
     requests.get("https://aps8train.herokuapp.com/api/update-lines")
     print('CRON - Updated LOG')
