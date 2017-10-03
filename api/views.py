@@ -63,6 +63,7 @@ def logs(request):
     results = []
     # Get line url param
     _line_number = request.GET.get('line', False)
+    _limit = int(request.GET.get('limit', 0))
 
     # verify if a line id was supplied
     if _line_number:
@@ -74,8 +75,14 @@ def logs(request):
                 'line': _get_line(line),
                 'logs': []
             })
+
             # Then, get the logs of that line
-            for log in Log.objects.filter(line_id=line.id).order_by('-updated_at'):
+            logs = Log.objects.filter(line_id=line.id).order_by('-updated_at')
+            # Apply limit, if it exist
+            if _limit > 0:
+                logs = logs[:_limit]
+
+            for i, log in enumerate(logs):
                 results[0]['logs'].append({
                     'log': _get_log(log)
                 })
@@ -95,7 +102,11 @@ def logs(request):
                 'logs': []
             })
             # Then, get the logs of that line
-            for log in Log.objects.filter(line_id=line.id).order_by('-updated_at'):
+            logs = Log.objects.filter(line_id=line.id).order_by('-updated_at')
+            # Apply limit, if it exist
+            if _limit > 0:
+                logs = logs[:_limit]
+            for log in logs:
                 results[i]['logs'].append({
                     'log': _get_log(log)
                 })
