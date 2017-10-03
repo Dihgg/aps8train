@@ -10,7 +10,7 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=15)
 def timed_job():
-    requests.get("https://aps8train.herokuapp.com/api/update-lines")
+    requests.get("https://aps8train.herokuapp.com/api/update")
     print('CRON - Updated LOG')
     logger.error("Running CRON")
 
