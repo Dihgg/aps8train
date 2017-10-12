@@ -8,6 +8,6 @@ admin.autodiscover()
 # url(r'^blog/', include('blog.urls')),
 
 urlpatterns = [
-    url(r'^api/', include('api.urls')),
+    url(r'^', include('api.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
