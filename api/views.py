@@ -114,6 +114,26 @@ def logs(request):
     return JsonResponse(results, safe=False)
 
 
+#  Get Status Endpoint
+def status(request):
+    _line_number = request.GET.get('line', False)
+    if _line_number:
+        # Get the line by line number
+        line = Line.objects.filter(number=_line_number).first()
+        # Get the latest log from that line
+        log = Log.objects.filter(line_id=line.id).latest('updated_at')
+
+        return JsonResponse({
+            'line': _get_line(line),
+            'log': _get_log(log)
+        }, safe=False)
+    else:
+        return JsonResponse({
+            'status': "error",
+            'message': "Line number is required"
+        }, safe=False)
+
+
 # PRIVATE FUNCTIONS
 # Get the line info
 def _get_line(line):
