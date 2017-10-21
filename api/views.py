@@ -130,7 +130,7 @@ def status(request):
         }, safe=False)
     else:
         results = []
-        for i, line in enumerate(Line.objects.all().iterator()):
+        for i, line in enumerate(Line.objects.all().order_by('number').iterator()):
             log = Log.objects.filter(line_id=line.id).latest('updated_at')
             results.append({
                 'line': _get_line(line),
