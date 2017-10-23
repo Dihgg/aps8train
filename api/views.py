@@ -1,9 +1,7 @@
 import logging
 import requests
+import time
 from django.utils import timezone
-import json
-from django.shortcuts import render
-from django.http import HttpResponse
 from django.http import JsonResponse
 from .models import Line
 from .models import Log
@@ -154,7 +152,7 @@ def _get_log(log):
     return {
         'status': log.status,
         'description': log.description,
-        'updated_at': log.updated_at
+        'updated_at': int(time.mktime(log.updated_at.timetuple())*1000)
     }
 
 
@@ -187,7 +185,7 @@ def _log(_line, _status, _description):
 
     # Verify if status changed or the log does not exist
     if (not last_log) or (_status != last_log.status):
-        # In this case, save a new low
+        # In this case, save a new log
         Log(
             line_id=line.id,
             status=_status,
