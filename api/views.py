@@ -152,7 +152,7 @@ def _get_log(log):
     return {
         'status': log.status,
         'description': log.description,
-        'updated_at': int(time.mktime(log.updated_at.timetuple())*1000)
+        'updated_at': int(time.gmtime(time.mktime(log.updated_at.timetuple()))*1000)
     }
 
 
